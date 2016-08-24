@@ -18,13 +18,13 @@ describe 'Jobs', set_app: true do
 
   it 'GET /jobs?ids=1' do
     response = get "/jobs?ids=#{job.id}", {}, headers
-    response.should deliver_json_for(jobs.first(1), version: 'v2')
+    response.should deliver_json_for([job], version: 'v2')
   end
 
   it 'GET /jobs?ids=1,2' do
     ids = jobs.map(&:id).sort.join(',')
     response = get "/jobs?ids=#{ids}", {}, headers
-    response.should deliver_json_for(jobs.order('id ASC'), version: 'v2')
+    response.should deliver_json_for(jobs.sort { |a,b| a.id <=> b.id }, version: 'v2')
   end
 
   context 'GET /jobs/:job_id/log.txt' do
