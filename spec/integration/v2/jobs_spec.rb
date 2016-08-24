@@ -18,7 +18,7 @@ describe 'Jobs', set_app: true do
 
   it 'GET /jobs?ids=1' do
     response = get "/jobs?ids=#{job.id}", {}, headers
-    response.should deliver_json_for(Jobs.new([job]), version: 'v2')
+    response.should deliver_json_for(Travis::Api::App::Endoint::Jobs.new([job]), version: 'v2')
   end
 
   it 'GET /jobs?ids=1,2' do
