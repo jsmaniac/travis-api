@@ -24,7 +24,7 @@ describe 'Jobs', set_app: true do
   it 'GET /jobs?ids=1,2' do
     ids = jobs.map(&:id).sort.join(',')
     response = get "/jobs?ids=#{ids}", {}, headers
-    response.should deliver_json_for(Travis::Api::App::Jobs.new(jobs.sort { |a,b| a.id <=> b.id })), version: 'v2')
+    response.should deliver_json_for(Travis::Api::App::Jobs.new(jobs.sort { |a,b| a.id <=> b.id }), version: 'v2')
   end
 
   context 'GET /jobs/:job_id/log.txt' do
